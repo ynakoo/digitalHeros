@@ -1,0 +1,362 @@
+.home { padding-top: var(--header-height); }
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-4xl) var(--space-xl);
+  overflow: hidden;
+  background: var(--gradient-hero);
+}
+
+.heroGlow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(108, 92, 231, 0.15) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: float 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+}
+
+.heroBadge {
+  display: inline-block;
+  padding: 8px 20px;
+  background: rgba(108, 92, 231, 0.12);
+  border: 1px solid rgba(108, 92, 231, 0.3);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--accent-primary-light);
+  margin-bottom: var(--space-xl);
+  animation: fadeInUp 0.6s ease;
+}
+
+.heroTitle {
+  font-size: var(--fs-5xl);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: var(--space-lg);
+  animation: fadeInUp 0.6s ease 0.1s both;
+}
+
+.gradientText {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradientTextTeal {
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradientTextGold {
+  background: var(--gradient-warm);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroSubtitle {
+  font-size: var(--fs-lg);
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto var(--space-2xl);
+  line-height: 1.7;
+  animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+.heroCtas {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.6s ease 0.3s both;
+}
+
+.heroStats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xl);
+  margin-top: var(--space-3xl);
+  animation: fadeInUp 0.6s ease 0.4s both;
+}
+
+.stat { text-align: center; }
+
+.statValue {
+  font-family: var(--font-heading);
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.statLabel {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.statDivider {
+  width: 1px;
+  height: 40px;
+  background: var(--border-glass);
+}
+
+/* Sections */
+.section {
+  padding: var(--space-4xl) 0;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+.sectionTitle {
+  font-size: var(--fs-3xl);
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
+.sectionSubtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: var(--fs-md);
+  margin-bottom: var(--space-2xl);
+}
+
+/* Steps */
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+.stepCard {
+  text-align: center;
+  padding: var(--space-2xl) var(--space-xl);
+  position: relative;
+}
+
+.stepNum {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-family: var(--font-heading);
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  color: rgba(255,255,255,0.04);
+}
+
+.stepIcon { font-size: 48px; margin-bottom: var(--space-lg); }
+
+.stepTitle {
+  font-size: var(--fs-xl);
+  margin-bottom: var(--space-sm);
+}
+
+.stepDesc {
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+}
+
+/* Pool */
+.poolGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+.poolCard {
+  text-align: center;
+  padding: var(--space-2xl);
+}
+
+.poolMatch {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.poolAmount {
+  font-family: var(--font-heading);
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  margin-bottom: var(--space-sm);
+}
+
+.poolShare {
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  margin-bottom: var(--space-md);
+}
+
+.jackpotBadge {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--warning-bg);
+  color: var(--accent-warm);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+/* Charities */
+.charitiesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+.charityCard { padding: 0; overflow: hidden; }
+
+.charityImage {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.charityContent { padding: var(--space-lg); }
+
+.charityName {
+  font-size: var(--fs-md);
+  margin-bottom: var(--space-sm);
+}
+
+.charityDesc {
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+}
+
+.centerCta {
+  text-align: center;
+  margin-top: var(--space-2xl);
+}
+
+/* Pricing */
+.pricingGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.pricingCard {
+  padding: var(--space-2xl);
+  text-align: center;
+  position: relative;
+}
+
+.pricingFeatured {
+  border-color: var(--accent-warm);
+}
+
+.popularBadge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 16px;
+  background: var(--gradient-warm);
+  color: var(--bg-primary);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+.planName {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+  color: var(--text-secondary);
+}
+
+.planPrice {
+  font-family: var(--font-heading);
+  font-size: var(--fs-4xl);
+  font-weight: 800;
+  margin-bottom: var(--space-sm);
+}
+
+.planPeriod {
+  font-size: var(--fs-base);
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.planSaving {
+  color: var(--accent-warm);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  margin-bottom: var(--space-lg);
+}
+
+.planFeatures {
+  text-align: left;
+  margin: var(--space-xl) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.planFeatures li {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  padding: 6px 0;
+}
+
+/* CTA */
+.ctaSection {
+  padding: var(--space-4xl) var(--space-xl);
+  text-align: center;
+  background: var(--gradient-hero);
+}
+
+.ctaTitle {
+  font-size: var(--fs-3xl);
+  margin-bottom: var(--space-md);
+}
+
+.ctaSubtitle {
+  color: var(--text-secondary);
+  font-size: var(--fs-md);
+  margin-bottom: var(--space-2xl);
+}
+
+@media (max-width: 768px) {
+  .stepsGrid, .poolGrid, .charitiesGrid { grid-template-columns: 1fr; }
+  .pricingGrid { grid-template-columns: 1fr; }
+  .heroStats {
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+  .statDivider { width: 60px; height: 1px; }
+}

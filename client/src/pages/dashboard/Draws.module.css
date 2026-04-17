@@ -1,0 +1,33 @@
+.title { font-size: var(--fs-2xl); margin-bottom: var(--space-xs); }
+.subtitle { color: var(--text-secondary); font-size: var(--fs-sm); margin-bottom: var(--space-2xl); }
+.grid { display: grid; grid-template-columns: 360px 1fr; gap: var(--space-xl); }
+.drawList { display: flex; flex-direction: column; gap: var(--space-md); }
+.drawItem { cursor: pointer; padding: var(--space-lg); }
+.drawItemActive { border-color: var(--accent-primary); background: rgba(108,92,231,0.06); }
+.drawHeader { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md); }
+.drawDate { font-weight: 600; font-size: var(--fs-sm); }
+.numbers { display: flex; gap: 8px; margin-bottom: var(--space-md); }
+.number { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: var(--bg-glass-strong); border-radius: var(--radius-md); font-family: var(--font-heading); font-weight: 700; font-size: var(--fs-sm); }
+.numberLarge { width: 52px; height: 52px; font-size: var(--fs-lg); background: var(--gradient-primary); color: white; border-radius: var(--radius-md); }
+.drawMeta { display: flex; justify-content: space-between; font-size: var(--fs-xs); color: var(--text-muted); }
+.detailPanel { min-height: 400px; }
+.detailTitle { font-size: var(--fs-xl); margin-bottom: var(--space-xl); }
+.winningNumbers { text-align: center; padding: var(--space-xl) 0; margin-bottom: var(--space-xl); border-bottom: 1px solid var(--border-glass); }
+.wnLabel { font-size: var(--fs-xs); color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: var(--space-md); }
+.poolBreakdown { margin-bottom: var(--space-xl); }
+.poolBreakdown h3 { font-size: var(--fs-md); margin-bottom: var(--space-md); }
+.poolTiers { display: flex; flex-direction: column; gap: var(--space-sm); }
+.tier { display: flex; justify-content: space-between; padding: 10px 14px; background: var(--bg-glass); border-radius: var(--radius-md); font-size: var(--fs-sm); }
+.tierAmount { font-weight: 600; color: var(--accent-warm); }
+.winnersList { margin-top: var(--space-xl); }
+.winnersList h3 { font-size: var(--fs-md); margin-bottom: var(--space-md); }
+.winnerItem { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--bg-glass); border-radius: var(--radius-md); margin-bottom: 8px; }
+.winnerName { font-size: var(--fs-sm); font-weight: 500; }
+.winnerPrize { font-weight: 700; color: var(--accent-warm); }
+.noWinners { color: var(--text-muted); font-size: var(--fs-sm); }
+.selectPrompt { display: flex; align-items: center; justify-content: center; min-height: 300px; }
+.selectPrompt p { color: var(--text-muted); }
+.empty { text-align: center; padding: var(--space-3xl); display: flex; flex-direction: column; align-items: center; gap: var(--space-md); }
+.empty h3 { font-size: var(--fs-lg); }
+.empty p { color: var(--text-secondary); font-size: var(--fs-sm); }
+@media (max-width: 1024px) { .grid { grid-template-columns: 1fr; } }

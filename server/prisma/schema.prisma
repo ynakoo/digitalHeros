@@ -1,0 +1,166 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// PROFILES (linked to Supabase Auth users)
+// ============================================
+model Profile {
+  id                  String    @id @default(uuid()) @db.Uuid
+  full_name           String
+  email               String    @unique
+  password            String
+  avatar_url          String?   @default("https://placehold.co/100x100?text=User")
+  charity_id          String?   @db.Uuid
+  charity_percentage  Int       @default(10)
+  subscription_status String    @default("none") // none, active, cancelled, lapsed
+  subscription_plan   String?   // monthly, yearly
+  subscription_start  DateTime?
+  subscription_end    DateTime?
+  role                String    @default("user") // user, admin
+  created_at          DateTime  @default(now())
+  updated_at          DateTime  @updatedAt
+
+  // Relations
+  charity     Charity?      @relation(fields: [charity_id], references: [id], onDelete: SetNull)
+  scores      Score[]
+  draw_wins   DrawWinner[]
+  donations   Donation[]
+
+  @@map("profiles")
+}
+
+// ============================================
+// CHARITIES
+// ============================================
+model Charity {
+  id          String    @id @default(uuid()) @db.Uuid
+  name        String
+  description String
+  image_url   String    @default("https://placehold.co/400x300?text=Charity")
+  website_url String?
+  is_featured Boolean   @default(false)
+  events      Json?
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+
+  // Relations
+  profiles  Profile[]
+  donations Donation[]
+
+  @@map("charities")
+}
+
+// ============================================
+// SCORES
+// ============================================
+model Score {
+  id          String   @id @default(uuid()) @db.Uuid
+  user_id     String   @db.Uuid
+  score       Int      // 1-45 Stableford
+  played_date DateTime @db.Date
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  // Relations
+  user Profile @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, played_date])
+  @@index([user_id])
+  @@index([played_date])
+  @@map("scores")
+}
+
+// ============================================
+// DRAWS
+// ============================================
+model Draw {
+  id                 String    @id @default(uuid()) @db.Uuid
+  draw_date          DateTime  @db.Date
+  draw_month         Int
+  draw_year          Int
+  status             String    @default("pending") // pending, simulated, published
+  draw_type          String    @default("random") // random, algorithmic
+  winning_numbers    Int[]
+  total_pool_amount  Decimal   @default(0) @db.Decimal(12, 2)
+  jackpot_rollover   Decimal   @default(0) @db.Decimal(12, 2)
+  active_subscribers Int       @default(0)
+  created_at         DateTime  @default(now())
+  published_at       DateTime?
+
+  // Relations
+  winners    DrawWinner[]
+  prize_pool PrizePool?
+
+  @@index([status])
+  @@index([draw_date])
+  @@map("draws")
+}
+
+// ============================================
+// DRAW WINNERS
+// ============================================
+model DrawWinner {
+  id                  String   @id @default(uuid()) @db.Uuid
+  draw_id             String   @db.Uuid
+  user_id             String   @db.Uuid
+  match_type          String   // match_5, match_4, match_3
+  matched_numbers     Int[]
+  prize_amount        Decimal  @db.Decimal(12, 2)
+  verification_status String   @default("pending") // pending, approved, rejected
+  proof_image_url     String?
+  payment_status      String   @default("pending") // pending, paid
+  created_at          DateTime @default(now())
+  updated_at          DateTime @updatedAt
+
+  // Relations
+  draw Draw    @relation(fields: [draw_id], references: [id], onDelete: Cascade)
+  user Profile @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([draw_id])
+  @@index([user_id])
+  @@map("draw_winners")
+}
+
+// ============================================
+// DONATIONS
+// ============================================
+model Donation {
+  id         String   @id @default(uuid()) @db.Uuid
+  user_id    String   @db.Uuid
+  charity_id String   @db.Uuid
+  amount     Decimal  @db.Decimal(12, 2)
+  status     String   @default("completed") // completed, pending
+  created_at DateTime @default(now())
+
+  // Relations
+  user    Profile @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  charity Charity @relation(fields: [charity_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id])
+  @@index([charity_id])
+  @@map("donations")
+}
+
+// ============================================
+// PRIZE POOLS
+// ============================================
+model PrizePool {
+  id              String   @id @default(uuid()) @db.Uuid
+  draw_id         String   @unique @db.Uuid
+  match_5_pool    Decimal  @default(0) @db.Decimal(12, 2)
+  match_4_pool    Decimal  @default(0) @db.Decimal(12, 2)
+  match_3_pool    Decimal  @default(0) @db.Decimal(12, 2)
+  jackpot_carried Decimal  @default(0) @db.Decimal(12, 2)
+  created_at      DateTime @default(now())
+
+  // Relations
+  draw Draw @relation(fields: [draw_id], references: [id], onDelete: Cascade)
+
+  @@map("prize_pools")
+}

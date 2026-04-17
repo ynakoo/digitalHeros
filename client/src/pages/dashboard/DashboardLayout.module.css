@@ -1,0 +1,23 @@
+.layout {
+  display: flex;
+  padding-top: var(--header-height);
+  min-height: 100vh;
+}
+.content {
+  margin-left: var(--sidebar-width);
+  flex: 1;
+  padding: var(--space-2xl);
+  max-width: calc(100% - var(--sidebar-width));
+}
+.pageTitle {
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--space-sm);
+}
+.pageSubtitle {
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  margin-bottom: var(--space-2xl);
+}
+@media (max-width: 1024px) {
+  .content { margin-left: 0; max-width: 100%; }
+}
