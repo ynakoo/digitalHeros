@@ -65,16 +65,29 @@ npm run dev
 
 Frontend runs on `http://localhost:5173`
 
-### 5. Create Test Users
+### 5. Test Accounts and Payment Simulations
 
-Use the seeded users created in the previous step:
+The seed script automatically populates the database with default test accounts you can use immediately:
+
+#### Test Users
 
 | Role | Email | Password |
 |------|-------|----------|
-| Admin | admin@golfgives.com | Admin123! |
-| User 1 | user1@golfgives.com | User123! |
+| **Admin** | admin@golfgives.com | Admin123! |
+| **Regular User** | user1@golfgives.com | User123! |
 
-> **Note:** The seed script automatically creates an admin user with the correct role. If you create new users via the signup page, they will default to the `user` role. You can update their role to `admin` using Prisma Studio (`npx prisma studio`).
+> **Note:** Any new users created via the signup page will default to the `user` role. You can upgrade their role to `admin` directly through Prisma Studio (`npx prisma studio`).
+
+#### Testing Subscriptions & Payments (Razorpay)
+
+The application uses Razorpay in **Test Mode** for subscription processing. To test the payment and subscription upgrade flow:
+
+1. Log in as a Regular User.
+2. Navigate to the User Dashboard and initiate a subscription upgrade.
+3. When the Razorpay checkout modal appears, **select any Bank** from the Netbanking options (or any other test payment method).
+4. Proceed to payment and click the **"Success"** button on the simulated bank page to complete the transaction.
+
+*No real bank details or credentials are required since the integration runs completely in a simulated test environment.*
 
 ## Environment Variables
 
@@ -84,6 +97,8 @@ DATABASE_URL=postgresql://postgres:YOUR-PASSWORD@localhost:5432/postgres
 JWT_SECRET=your_super_secret_jwt_key_here
 PORT=5000
 CLIENT_URL=http://localhost:5173
+RAZORPAY_KEY_ID=your_razorpay_key_id
+RAZORPAY_KEY_SECRET=your_razorpay_key_secret
 ```
 
 ### Client (`client/.env`)
@@ -94,7 +109,7 @@ VITE_API_URL=http://localhost:5000
 ## Key Features
 
 - **Prisma ORM** — Type-safe database access with auto-generated client
-- **Subscription System** — Monthly/yearly plans (admin-managed, no Stripe)
+- **Subscription System** — Monthly/yearly plans with recurring billing integrated via Razorpay
 - **Score Management** — 5-score rolling system (Stableford 1-45)
 - **Draw Engine** — Random + algorithmic modes with simulation
 - **Prize Pool** — Auto-calculated (40% / 35% / 25% split) with jackpot rollover
