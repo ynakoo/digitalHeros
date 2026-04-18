@@ -74,18 +74,18 @@ async function main() {
   const admin = await prisma.profile.create({
     data: {
       full_name: 'Admin User',
-      email: 'admin@golfgives.com',
+      email: 'admin@gmail.com',
       password: hashedPassword,
       role: 'admin',
       subscription_status: 'none'
     }
   });
-  console.log('✅ Seeded Admin User (admin@golfgives.com / Admin123!)');
+  console.log('✅ Seeded Admin User (admin@gmail.com / Admin123!)');
 
   const user = await prisma.profile.create({
     data: {
       full_name: 'Test Setup User',
-      email: 'user1@golfgives.com',
+      email: 'user1@gmail.com',
       password: userPassword,
       role: 'user',
       charity_id: firstCharity?.id || null,
@@ -96,7 +96,7 @@ async function main() {
       subscription_end: new Date(new Date().setMonth(new Date().getMonth() + 1))
     }
   });
-  console.log('✅ Seeded Test User (user1@golfgives.com / User123!) (Active Sub)');
+  console.log('✅ Seeded Test User (user1@gmail.com / User123!) (Active Sub)');
 
   // 4. Seed Random Scores for Test User
   const today = new Date();
