@@ -5,9 +5,12 @@ import Input from '../../components/ui/Input';
 import Modal from '../../components/ui/Modal';
 import Loader from '../../components/ui/Loader';
 import api from '../../api/client';
+import { useAuth } from '../../hooks/useAuth';
+import { Link } from 'react-router-dom';
 import styles from './Scores.module.css';
 
 export default function Scores() {
+  const { isSubscriber } = useAuth();
   const [scores, setScores] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -58,6 +61,16 @@ export default function Scores() {
   };
 
   if (loading) return <Loader fullPage />;
+
+  if (!isSubscriber) {
+    return (
+      <div style={{ textAlign: 'center', padding: '100px 20px' }}>
+        <h2>Subscription Required</h2>
+        <p style={{ margin: '16px 0', color: 'var(--text-muted)' }}>You must have an active subscription to submit scores and participate in monthly draws.</p>
+        <Link to="/subscribe"><Button variant="primary">Upgrade Plan</Button></Link>
+      </div>
+    );
+  }
 
   return (
     <div>

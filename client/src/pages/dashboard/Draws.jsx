@@ -3,9 +3,13 @@ import Card from '../../components/ui/Card';
 import Badge from '../../components/ui/Badge';
 import Loader from '../../components/ui/Loader';
 import api from '../../api/client';
+import { useAuth } from '../../hooks/useAuth';
+import { Link } from 'react-router-dom';
+import Button from '../../components/ui/Button';
 import styles from './Draws.module.css';
 
 export default function Draws() {
+  const { isSubscriber } = useAuth();
   const [draws, setDraws] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState(null);
@@ -24,6 +28,16 @@ export default function Draws() {
   };
 
   if (loading) return <Loader fullPage />;
+
+  if (!isSubscriber) {
+    return (
+      <div style={{ textAlign: 'center', padding: '100px 20px' }}>
+        <h2>Subscription Required</h2>
+        <p style={{ margin: '16px 0', color: 'var(--text-muted)' }}>You must have an active subscription to view draw results and check if you've won.</p>
+        <Link to="/subscribe"><Button variant="primary">Upgrade Plan</Button></Link>
+      </div>
+    );
+  }
 
   return (
     <div>

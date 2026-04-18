@@ -5,7 +5,7 @@ import Button from '../ui/Button';
 import styles from './Header.module.css';
 
 export default function Header() {
-  const { user, isAuthenticated, isAdmin, logout } = useAuth();
+  const { user, isAuthenticated, isAdmin, isSubscriber, logout } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -53,9 +53,15 @@ export default function Header() {
 
         <div className={styles.actions}>
           {isAuthenticated ? (
-            <div className={styles.avatarWrap}>
-              <div
-                className={styles.avatar}
+            <>
+              {!isSubscriber && (
+                <Link to="/subscribe" style={{ marginRight: '16px' }}>
+                  <Button variant="primary" size="small">Upgrade Plan</Button>
+                </Link>
+              )}
+              <div className={styles.avatarWrap}>
+                <div
+                  className={styles.avatar}
                 onClick={() => setShowDropdown(!showDropdown)}
               >
                 {user?.full_name?.charAt(0)?.toUpperCase() || 'U'}
@@ -88,6 +94,7 @@ export default function Header() {
                 </div>
               )}
             </div>
+            </>
           ) : (
             <>
               <Link to="/login">

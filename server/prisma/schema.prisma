@@ -22,6 +22,7 @@ model Profile {
   subscription_plan   String?   // monthly, yearly
   subscription_start  DateTime?
   subscription_end    DateTime?
+  razorpay_subscription_id String? @unique
   role                String    @default("user") // user, admin
   created_at          DateTime  @default(now())
   updated_at          DateTime  @updatedAt

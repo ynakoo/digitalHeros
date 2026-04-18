@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const prisma = require('../config/prisma');
 const authMiddleware = require('../middleware/auth');
+const subscriberOnly = require('../middleware/subscriberOnly');
 
 // GET /api/scores — fetch user's scores (max 5, desc by date)
 router.get('/', authMiddleware, async (req, res) => {
@@ -19,7 +20,7 @@ router.get('/', authMiddleware, async (req, res) => {
 });
 
 // POST /api/scores — add a new score
-router.post('/', authMiddleware, async (req, res) => {
+router.post('/', authMiddleware, subscriberOnly, async (req, res) => {
   try {
     const { score, played_date } = req.body;
 
@@ -78,7 +79,7 @@ router.post('/', authMiddleware, async (req, res) => {
 });
 
 // PUT /api/scores/:id — edit a score
-router.put('/:id', authMiddleware, async (req, res) => {
+router.put('/:id', authMiddleware, subscriberOnly, async (req, res) => {
   try {
     const { score, played_date } = req.body;
 
@@ -126,7 +127,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
 });
 
 // DELETE /api/scores/:id
-router.delete('/:id', authMiddleware, async (req, res) => {
+router.delete('/:id', authMiddleware, subscriberOnly, async (req, res) => {
   try {
     const existing = await prisma.score.findFirst({
       where: { id: req.params.id, user_id: req.user.id }
