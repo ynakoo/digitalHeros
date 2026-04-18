@@ -73,11 +73,10 @@ The seed script automatically populates the database with default test accounts 
 
 | Role | Email | Password |
 |------|-------|----------|
-| **Admin** | admin@golfgives.com | Admin123! |
-| **Regular User** | user1@golfgives.com | User123! |
+| **Admin** | admin@gmail.com | 123456 |
+| **Test Setup User** | user1@gmail.com | 123456 |
 
-> **Note:** Any new users created via the signup page will default to the `user` role. You can upgrade their role to `admin` directly through Prisma Studio (`npx prisma studio`).
-
+> **Note:** Any new users created via the signup page will default to the `user` role. 
 #### Testing Subscriptions & Payments (Razorpay)
 
 The application uses Razorpay in **Test Mode** for subscription processing. To test the payment and subscription upgrade flow:
